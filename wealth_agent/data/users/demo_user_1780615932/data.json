@@ -1,0 +1,64 @@
+{
+  "assets": {
+    "checking": 8000,
+    "savings": 25000,
+    "investments": {
+      "stocks": 45000,
+      "bonds": 20000
+    }
+  },
+  "liabilities": {
+    "mortgage": 250000,
+    "car_loan": 35000
+  },
+  "expenses": [
+    {
+      "date": "2026-05-01",
+      "category": "groceries",
+      "amount": 400
+    },
+    {
+      "date": "2026-05-02",
+      "category": "utilities",
+      "amount": 150
+    },
+    {
+      "date": "2026-05-03",
+      "category": "transportation",
+      "amount": 200
+    }
+  ],
+  "income": [
+    {
+      "source": "salary",
+      "amount_monthly": 12000
+    },
+    {
+      "source": "investment_returns",
+      "amount_monthly": 1500
+    }
+  ],
+  "credit_cards": [
+    {
+      "name": "Visa Platinum",
+      "balance": 2500,
+      "limit": 25000
+    },
+    {
+      "name": "Amex",
+      "balance": 500,
+      "limit": 10000
+    }
+  ],
+  "profile": {
+    "risk_tolerance": "moderate",
+    "retirement_age": 65,
+    "goals": [
+      "retire comfortably",
+      "buy second home"
+    ],
+    "full_name": "Demo User",
+    "residency": "USA",
+    "citizenship": "USA"
+  }
+}

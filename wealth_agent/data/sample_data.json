@@ -1,0 +1,32 @@
+{
+  "assets": {
+    "checking": 5000,
+    "savings": 20000,
+    "investments": {
+      "stockA": 15000,
+      "stockB": 5000
+    }
+  },
+  "liabilities": {
+    "mortgage": 150000,
+    "credit_cards": 2000
+  },
+  "expenses": [
+    {"date": "2026-05-01", "category": "groceries", "amount": 300},
+    {"date": "2026-05-15", "category": "rent", "amount": 1500},
+    {"date": "2026-04-12", "category": "utilities", "amount": 200}
+  ],
+  "income": [
+    {"source": "salary", "amount_monthly": 5000},
+    {"source": "dividends", "amount_monthly": 200}
+  ],
+  "credit_cards": [
+    {"name": "Visa", "balance": 500, "limit": 5000, "apr": 19.99},
+    {"name": "Amex", "balance": 1500, "limit": 10000, "apr": 15.99}
+  ],
+  "profile": {
+    "risk_tolerance": "moderate",
+    "retirement_age": 65,
+    "goals": ["buy house", "retire"]
+  }
+}

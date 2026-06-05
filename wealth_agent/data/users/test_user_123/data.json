@@ -1,0 +1,32 @@
+{
+  "assets": {
+    "checking": 10000,
+    "savings": 20000
+  },
+  "liabilities": {
+    "mortgage": 50000
+  },
+  "expenses": [
+    {
+      "date": "2026-05-01",
+      "amount": 500
+    }
+  ],
+  "income": [
+    {
+      "source": "salary",
+      "amount_monthly": 5000
+    }
+  ],
+  "credit_cards": [
+    {
+      "name": "Visa",
+      "balance": 1000
+    }
+  ],
+  "profile": {
+    "risk_tolerance": "moderate",
+    "retirement_age": 65,
+    "goals": []
+  }
+}

@@ -1,0 +1,10 @@
+{"id": "g1", "prompt": "What is my net worth?", "expected_contains": ["-107000", "net worth"], "agent": "aurelius", "category": "finance_calculation"}
+{"id": "g2", "prompt": "Show me my credit cards", "expected_contains": ["Visa", "Amex"], "agent": "aurelius", "category": "credit_management"}
+{"id": "g3", "prompt": "What is my monthly income?", "expected_contains": ["5200", "monthly"], "agent": "estate_steward", "category": "income_tracking"}
+{"id": "g4", "prompt": "List my accounts by asset class", "expected_contains": ["checking", "savings", "investments"], "agent": "estate_steward", "category": "asset_management"}
+{"id": "g5", "prompt": "Get the stock price for AAPL", "expected_contains": ["AAPL", "price"], "agent": "markets_steward", "category": "market_data"}
+{"id": "g6", "prompt": "Rebalance my portfolio to 60% stocks and 40% bonds", "expected_contains": ["requires_confirmation", "proposal"], "agent": "markets_steward", "category": "portfolio_rebalancing"}
+{"id": "g7", "prompt": "Book me a tax preparation appointment", "expected_contains": ["requires_confirmation", "proposal"], "agent": "concierge_steward", "category": "service_booking"}
+{"id": "g8", "prompt": "What are my financial goals?", "expected_contains": ["buy house", "retire"], "agent": "aurelius", "category": "goal_tracking"}
+{"id": "g9", "prompt": "Calculate 100 * 2 + 50", "expected_contains": ["250"], "agent": "aurelius", "category": "math"}
+{"id": "g10", "prompt": "How much did I spend in May?", "expected_contains": ["$2,000", "May"], "agent": "aurelius", "category": "expense_tracking"}

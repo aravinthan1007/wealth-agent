@@ -1,0 +1,466 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Aurelius Wealth - Omni-Asset Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#271013",
+                        "surface-variant": "#e3e2e0",
+                        "surface-dim": "#dbdad7",
+                        "on-tertiary-fixed-variant": "#5d3f42",
+                        "surface-container-low": "#f5f3f0",
+                        "on-surface-variant": "#434843",
+                        "outline": "#737973",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#efeeeb",
+                        "primary-container": "#1b3022",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#b4cdb8",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#0b2013",
+                        "primary-fixed-dim": "#b4cdb8",
+                        "on-secondary-fixed": "#261900",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f1ee",
+                        "surface-container-high": "#e9e8e5",
+                        "primary-fixed": "#d0e9d4",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "tertiary-container": "#3f2427",
+                        "surface": "#fbf9f6",
+                        "outline-variant": "#c3c8c1",
+                        "on-secondary-container": "#785a1a",
+                        "surface-container-highest": "#e3e2e0",
+                        "secondary": "#775a19",
+                        "primary": "#061b0e",
+                        "tertiary-fixed": "#ffd9dc",
+                        "surface-tint": "#4d6453",
+                        "secondary-fixed": "#ffdea5",
+                        "on-tertiary-fixed": "#2d1417",
+                        "tertiary-fixed-dim": "#e7bcbf",
+                        "on-primary-fixed-variant": "#364c3c",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fbf9f6",
+                        "on-primary-container": "#819986",
+                        "secondary-fixed-dim": "#e9c176",
+                        "inverse-surface": "#30312f",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "background": "#fbf9f6",
+                        "secondary-container": "#fed488",
+                        "on-tertiary-container": "#b0898c",
+                        "on-error": "#ffffff"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fbf9f6; color: #1b1c1a; }
+        .hard-inset { border-top: 1px solid #ffffff; border-bottom: 1px solid #dbdad7; }
+        .ledger-border { border: 1px solid #c3c8c1; }
+        .gold-separator { height: 1px; background-color: #775a19; width: 100%; }
+</style>
+</head>
+<body class="antialiased selection:bg-secondary selection:text-on-secondary min-h-screen flex flex-col md:flex-row">
+<!-- Mobile TopNav -->
+<nav class="md:hidden bg-surface text-primary w-full top-0 sticky z-50 flex flex-col border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-5 py-4">
+<span class="font-bold text-xl text-primary uppercase">Aurelius Wealth</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary">support_agent</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary">settings</span>
+</div>
+</div>
+<div class="flex overflow-x-auto px-5 gap-6 border-t border-outline-variant py-2 bg-surface-container-low">
+<span class="text-primary font-bold border-b-2 border-primary uppercase pb-1 whitespace-nowrap cursor-pointer">Portfolio</span>
+<span class="text-on-surface-variant uppercase pb-1 whitespace-nowrap cursor-pointer hover:text-secondary">Tangible Wealth</span>
+<span class="text-on-surface-variant uppercase pb-1 whitespace-nowrap cursor-pointer hover:text-secondary">Liabilities</span>
+</div>
+</nav>
+
+<!-- Desktop SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface-container-low py-8 z-40">
+<div class="px-6 mb-12">
+<h1 class="text-3xl font-bold text-primary">Aurelius Wealth</h1>
+<p class="text-xs uppercase text-on-surface-variant mt-2 tracking-widest">Private Office</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="text-on-primary-fixed-variant border-l-4 border-secondary bg-surface-container-high px-4 py-3 flex items-center gap-3" href="#portfolio">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="uppercase tracking-wider">Portfolio</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 hover:bg-surface-container-highest transition-all flex items-center gap-3" href="#liquid">
+<span class="material-symbols-outlined">show_chart</span>
+<span class="uppercase tracking-wider">Liquid Assets</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 hover:bg-surface-container-highest transition-all flex items-center gap-3" href="#tangible">
+<span class="material-symbols-outlined">diamond</span>
+<span class="uppercase tracking-wider">Tangible Wealth</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 hover:bg-surface-container-highest transition-all flex items-center gap-3" href="#liabilities">
+<span class="material-symbols-outlined">credit_card</span>
+<span class="uppercase tracking-wider">Liabilities</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 hover:bg-surface-container-highest transition-all flex items-center gap-3" href="#concierge">
+<span class="material-symbols-outlined">concierge</span>
+<span class="uppercase tracking-wider">Concierge</span>
+</a>
+</nav>
+<div class="px-6 mb-8 mt-auto">
+<button class="w-full bg-primary text-on-primary uppercase py-3 hover:bg-primary-container transition-colors" onclick="openAdvisor()">Request Advisory</button>
+</div>
+<div class="flex flex-col gap-1 border-t border-outline-variant pt-4">
+<a class="text-on-surface-variant px-4 py-2 hover:bg-surface-container-highest transition-all flex items-center gap-3" href="#settings">
+<span class="material-symbols-outlined">settings</span>
+<span class="uppercase tracking-wider text-xs">Settings</span>
+</a>
+<a class="text-on-surface-variant px-4 py-2 hover:bg-surface-container-highest transition-all flex items-center gap-3" href="#legal">
+<span class="material-symbols-outlined">gavel</span>
+<span class="uppercase tracking-wider text-xs">Legal</span>
+</a>
+</div>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-1 w-full md:ml-64 px-5 md:px-16 py-8 md:py-16">
+<!-- Loading State -->
+<div id="loading" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+<div class="bg-white p-8 rounded text-center">
+<p class="text-lg font-semibold mb-4">Loading your wealth profile...</p>
+<div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+</div>
+</div>
+
+<!-- Page Header -->
+<header class="mb-12">
+<h2 class="text-xs uppercase text-on-surface-variant tracking-widest mb-2">Omni-Asset Ledger</h2>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex items-baseline gap-2">
+<span id="networth" class="text-5xl md:text-7xl font-bold text-primary">$142,850,000</span>
+<span class="text-lg text-outline">.00</span>
+</div>
+<div class="flex gap-4 items-center">
+<div class="text-right">
+<p class="text-xs text-on-surface-variant uppercase">YTD Growth</p>
+<p class="text-sm font-semibold text-primary" id="ytd-growth">+ 8.4%</p>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="text-right">
+<p class="text-xs text-on-surface-variant uppercase">Last Synced</p>
+<p class="text-sm text-on-surface" id="last-synced">Today, 09:41 AM</p>
+</div>
+</div>
+</div>
+<div class="gold-separator mt-6"></div>
+</header>
+
+<!-- Main Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left: Ledgers (Col 8) -->
+<div class="lg:col-span-8 flex flex-col gap-12">
+
+<!-- Liquid Assets -->
+<section id="liquid">
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-2xl font-bold text-primary">Liquid Assets</h3>
+<span id="liquid-total" class="text-xs text-on-surface-variant uppercase">$84.2M Total</span>
+</div>
+<div class="ledger-border bg-surface-container-lowest">
+<div class="flex justify-between px-4 py-3 border-b border-outline-variant bg-surface-container-low hard-inset">
+<span class="text-xs text-on-surface-variant uppercase w-1/3">Asset Class</span>
+<span class="text-xs text-on-surface-variant uppercase w-1/3 text-right">Value</span>
+<span class="text-xs text-on-surface-variant uppercase w-1/3 text-right">24h Δ</span>
+</div>
+<div id="liquid-assets-list"></div>
+</div>
+</section>
+
+<!-- Tangible Assets -->
+<section id="tangible">
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-2xl font-bold text-primary">Tangible Wealth</h3>
+<span id="tangible-total" class="text-xs text-on-surface-variant uppercase">$64.8M Est. Value</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="tangible-assets-list"></div>
+</section>
+
+<!-- Liabilities -->
+<section id="liabilities">
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-2xl font-bold text-primary">Liabilities</h3>
+<span id="liabilities-total" class="text-xs text-on-surface-variant uppercase">$6.15M Total</span>
+</div>
+<div class="ledger-border bg-surface-container-lowest" id="liabilities-list"></div>
+</section>
+
+</div>
+
+<!-- Right: Agent Insights (Col 4) -->
+<aside class="lg:col-span-4 bg-surface-container-low border border-outline-variant p-6 sticky top-24">
+<div class="flex items-center gap-2 mb-6 border-b border-outline-variant pb-4">
+<span class="material-symbols-outlined text-secondary">assignment_ind</span>
+<h3 class="text-2xl font-bold text-primary">Agent Insights</h3>
+</div>
+<div id="insights-container" class="flex flex-col gap-4">
+<p class="text-sm text-on-surface-variant">Loading insights...</p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant text-center">
+<p class="text-xs text-on-surface-variant mb-4">Need to discuss adjustments?</p>
+<button class="w-full bg-surface border border-secondary text-secondary uppercase py-3 hover:bg-secondary hover:text-on-secondary transition-colors" onclick="openAdvisor()">Contact Advisor</button>
+</div>
+</aside>
+
+</div>
+</main>
+
+<!-- Modal: Chat with Agent -->
+<div id="advisorModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+<div class="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-96 flex flex-col">
+<div class="flex justify-between items-center p-6 border-b border-outline-variant">
+<h2 class="text-xl font-bold text-primary">Chat with Aurelius</h2>
+<button onclick="closeAdvisor()" class="material-symbols-outlined cursor-pointer">close</button>
+</div>
+<div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+<div class="p-6 border-t border-outline-variant flex gap-2">
+<input type="text" id="chat-input" placeholder="Ask about your wealth..." class="flex-1 border border-outline-variant px-3 py-2 rounded">
+<button onclick="sendMessage()" class="bg-primary text-white px-6 py-2 rounded hover:bg-primary-container transition-colors">Send</button>
+</div>
+</div>
+</div>
+
+<!-- Modal: Review Proposal -->
+<div id="proposalModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+<div class="bg-white rounded-lg shadow-lg max-w-2xl w-full">
+<div class="flex justify-between items-center p-6 border-b border-outline-variant">
+<h2 class="text-xl font-bold text-primary">Review Proposal</h2>
+<button onclick="closeProposal()" class="material-symbols-outlined cursor-pointer">close</button>
+</div>
+<div id="proposal-content" class="p-6 space-y-4"></div>
+<div class="p-6 border-t border-outline-variant flex justify-end gap-3">
+<button onclick="closeProposal()" class="border border-secondary text-secondary px-6 py-2 rounded hover:bg-surface-container transition-colors">Decline</button>
+<button onclick="approveProposal()" class="bg-primary text-white px-6 py-2 rounded hover:bg-primary-container transition-colors">Approve</button>
+</div>
+</div>
+</div>
+
+<script>
+// API Configuration
+const API_BASE = 'http://localhost:5000/api';
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadDashboard();
+    setupChatInput();
+});
+
+async function loadDashboard() {
+    try {
+        showLoading(true);
+
+        // Fetch wealth data
+        const wealthRes = await fetch(`${API_BASE}/wealth`);
+        const wealth = await wealthRes.json();
+
+        // Update net worth
+        document.getElementById('networth').textContent = formatCurrency(wealth.networth);
+        document.getElementById('last-synced').textContent = new Date().toLocaleString();
+
+        // Fetch and display liquid assets
+        const liquidRes = await fetch(`${API_BASE}/liquid-assets`);
+        const liquid = await liquidRes.json();
+        renderLiquidAssets(liquid.assets);
+        document.getElementById('liquid-total').textContent = formatCurrency(liquid.total) + ' Total';
+
+        // Fetch and display tangible assets
+        const tangibleRes = await fetch(`${API_BASE}/tangible-assets`);
+        const tangible = await tangibleRes.json();
+        renderTangibleAssets(tangible.assets);
+        document.getElementById('tangible-total').textContent = formatCurrency(tangible.total) + ' Est. Value';
+
+        // Fetch and display liabilities
+        const liabilitiesRes = await fetch(`${API_BASE}/liabilities`);
+        const liabilities = await liabilitiesRes.json();
+        renderLiabilities(liabilities.liabilities);
+        document.getElementById('liabilities-total').textContent = formatCurrency(liabilities.total) + ' Total';
+
+        // Fetch agent insights
+        const insightsRes = await fetch(`${API_BASE}/insights`);
+        const insights = await insightsRes.json();
+        renderInsights(insights.insights);
+
+        showLoading(false);
+    } catch (error) {
+        console.error('Error loading dashboard:', error);
+        showLoading(false);
+        alert('Error loading dashboard data');
+    }
+}
+
+function renderLiquidAssets(assets) {
+    const container = document.getElementById('liquid-assets-list');
+    container.innerHTML = assets.map(asset => `
+        <div class="flex justify-between px-4 py-4 border-b border-outline-variant hover:bg-surface transition-colors">
+            <div class="w-1/3 flex items-center gap-3">
+                <span class="material-symbols-outlined text-outline">${asset.icon || 'account_balance'}</span>
+                <div>
+                    <p class="font-medium text-on-surface">${asset.name}</p>
+                    <p class="text-xs text-on-surface-variant">${asset.description}</p>
+                </div>
+            </div>
+            <span class="w-1/3 text-right font-medium text-on-surface">${formatCurrency(asset.value)}</span>
+            <span class="w-1/3 text-right text-sm font-semibold text-${asset.change >= 0 ? 'primary' : 'error'} flex items-center justify-end gap-1">
+                <span class="material-symbols-outlined text-xs">${asset.change >= 0 ? 'arrow_upward' : 'arrow_downward'}</span>
+                ${asset.change >= 0 ? '+' : ''}${asset.change}%
+            </span>
+        </div>
+    `).join('');
+}
+
+function renderTangibleAssets(assets) {
+    const container = document.getElementById('tangible-assets-list');
+    container.innerHTML = assets.map(asset => `
+        <div class="ledger-border bg-surface-container-lowest p-4 hover:border-secondary transition-colors cursor-pointer group" onclick="viewAsset('${asset.id}')">
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex gap-3">
+                    <div class="w-12 h-12 border border-outline-variant bg-cover bg-center" style="background-image: url('${asset.image}')"></div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase tracking-wider mb-1">${asset.type}</p>
+                        <p class="font-semibold text-primary">${asset.name}</p>
+                        <p class="text-xs text-outline">${asset.location}</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors">arrow_forward</span>
+            </div>
+            <div class="flex justify-between items-end pt-3 border-t border-outline-variant">
+                <div>
+                    <p class="text-xs text-on-surface-variant">Acquisition</p>
+                    <p class="font-medium text-on-surface">${formatCurrency(asset.acquisition)}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-on-surface-variant">Current Mkt</p>
+                    <p class="font-semibold text-primary">${formatCurrency(asset.currentValue)}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderLiabilities(liabilities) {
+    const container = document.getElementById('liabilities-list');
+    container.innerHTML = liabilities.map(liability => `
+        <div class="flex justify-between px-4 py-4 border-b border-outline-variant">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-outline">${liability.icon || 'credit_card'}</span>
+                <div>
+                    <p class="font-medium text-on-surface">${liability.name}</p>
+                    <p class="text-xs ${liability.urgent ? 'text-error' : 'text-on-surface-variant'}">${liability.dueDate}</p>
+                </div>
+            </div>
+            <span class="font-medium text-on-surface">${formatCurrency(liability.amount)}</span>
+        </div>
+    `).join('');
+}
+
+function renderInsights(insights) {
+    const container = document.getElementById('insights-container');
+    container.innerHTML = insights.map(insight => `
+        <div class="bg-surface border border-outline-variant ${insight.isAlert ? 'border-l-2 border-l-secondary' : ''} p-4 relative group">
+            ${insight.isAlert ? '<div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-secondary"></div>' : ''}
+            <p class="text-xs text-on-surface-variant uppercase mb-2">${insight.title}</p>
+            <p class="text-sm text-primary mb-3">${insight.message}</p>
+            ${insight.action ? `<button class="text-xs text-secondary uppercase border-b border-secondary hover:text-primary transition-colors pb-0.5" onclick="handleInsightAction('${insight.actionType}', '${insight.actionData}')">${insight.action}</button>` : ''}
+        </div>
+    `).join('');
+}
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(value);
+}
+
+function showLoading(show) {
+    document.getElementById('loading').style.display = show ? 'flex' : 'none';
+}
+
+function openAdvisor() {
+    document.getElementById('advisorModal').style.display = 'flex';
+    document.getElementById('chat-input').focus();
+}
+
+function closeAdvisor() {
+    document.getElementById('advisorModal').style.display = 'none';
+}
+
+function setupChatInput() {
+    document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+}
+
+async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const messagesDiv = document.getElementById('chat-messages');
+    messagesDiv.innerHTML += `<div class="text-right"><p class="bg-primary text-white px-4 py-2 rounded-lg inline-block">${message}</p></div>`;
+    input.value = '';
+
+    try {
+        const res = await fetch(`${API_BASE}/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+
+        messagesDiv.innerHTML += `<div class="text-left"><p class="bg-surface-container px-4 py-2 rounded-lg inline-block">${data.response}</p></div>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    } catch (error) {
+        console.error('Error sending message:', error);
+    }
+}
+
+function handleInsightAction(type, data) {
+    if (type === 'review_proposal') {
+        showProposal(JSON.parse(data));
+    }
+}
+
+function showProposal(proposal) {
+    document.getElementById('proposal-content').innerHTML = `
+        <div>
+            <h3 class="font-bold text-lg mb-2">${proposal.title}</h3>
+            <p class="text-sm text-on-surface mb-4">${proposal.description}</p>
+            <div class="bg-surface-container-low p-4 rounded">
+                ${proposal.details || ''}
+            </div>
+        </div>
+    `;
+    document.getElementById('proposalModal').style.display = 'flex';
+}
+
+function closeProposal() {
+    document.getElementById('proposalModal').style.display = 'none';
+}
+
+function approveProposal() {
+    alert('Proposal approved!');
+    closeProposal();
+}
+</script>
+</body></html>

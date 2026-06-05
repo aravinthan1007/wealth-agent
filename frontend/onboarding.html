@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Aurelius Wealth - Identity Onboarding</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@200..300,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1a",
+                        "on-tertiary-fixed": "#2c1517",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fbf9f6",
+                        "outline-variant": "#C3C8C1",
+                        "primary-fixed": "#d0e9d4",
+                        "on-tertiary-fixed-variant": "#5d3f42",
+                        "surface-tint": "#4d6453",
+                        "on-surface": "#1b1c1a",
+                        "surface-container-low": "#f5f3f0",
+                        "on-primary-fixed": "#0b2013",
+                        "tertiary-fixed-dim": "#e6bcbf",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e9e8e5",
+                        "on-primary-fixed-variant": "#364c3c",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b4cdb8",
+                        "tertiary-container": "#3f2427",
+                        "on-primary": "#ffffff",
+                        "background": "#fbf9f6",
+                        "secondary": "#775a19",
+                        "primary": "#061b0e",
+                        "on-surface-variant": "#434843",
+                        "primary-fixed-dim": "#b4cdb8",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "on-tertiary-container": "#af898c",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "inverse-on-surface": "#f2f1ee",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffd9dc",
+                        "inverse-surface": "#30312f",
+                        "surface-bright": "#fbf9f6",
+                        "ledger-green": "#061B0E",
+                        "primary-container": "#1b3022",
+                        "gold-accent": "#775A19",
+                        "surface-container": "#efeeeb",
+                        "outline": "#737973",
+                        "surface-dim": "#dbdad7",
+                        "on-secondary-container": "#785a1a",
+                        "surface-container-highest": "#e3e2e0",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e3e2e0",
+                        "secondary-container": "#fed488",
+                        "tertiary": "#271013",
+                        "on-primary-container": "#819986",
+                        "secondary-fixed": "#ffdea5",
+                        "on-secondary-fixed": "#261900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-indicator {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        .step-indicator::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #e3e2e0;
+        }
+        .step-indicator.active::after {
+            background: #775a19;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+    <!-- Mobile Top Navigation -->
+    <header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-20 bg-surface-container-low border-b border-outline-variant sticky top-0 z-50 shrink-0">
+        <div class="font-headline-md text-headline-md font-bold text-primary">Aurelius Wealth</div>
+        <button class="text-on-surface-variant hover:text-gold-accent transition-colors duration-200 focus:outline-none">
+            <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+        </button>
+    </header>
+
+    <!-- Desktop Side Navigation -->
+    <nav class="hidden md:flex flex-col h-screen py-8 w-64 bg-surface-container-low border-r border-outline-variant shrink-0 sticky top-0 z-40 overflow-y-auto">
+        <div class="px-6 mb-12">
+            <div class="font-headline-md text-headline-md text-primary mb-1">Wealth Onboarding</div>
+            <div class="font-body-md text-body-md text-on-surface-variant">Step <span id="currentStep">1</span> of 4</div>
+        </div>
+        <div class="flex-1 flex flex-col gap-2 w-full">
+            <!-- Identity Tab -->
+            <a class="step-tab w-full flex items-center px-6 py-4 border-l-4 border-transparent text-on-surface-variant hover:bg-surface-container transition-all duration-150 group" data-step="1" href="#identity">
+                <span class="material-symbols-outlined mr-4" data-icon="person_edit">person_edit</span>
+                <span class="font-label-md text-label-md">Identity</span>
+            </a>
+            <!-- Financials Tab -->
+            <a class="step-tab w-full flex items-center px-6 py-4 border-l-4 border-transparent text-on-surface-variant opacity-50 hover:bg-surface-container transition-all duration-150 group cursor-not-allowed" data-step="2" href="#financials">
+                <span class="material-symbols-outlined mr-4" data-icon="account_balance">account_balance</span>
+                <span class="font-label-md text-label-md">Financials</span>
+            </a>
+            <!-- Strategy Tab -->
+            <a class="step-tab w-full flex items-center px-6 py-4 border-l-4 border-transparent text-on-surface-variant opacity-50 hover:bg-surface-container transition-all duration-150 group cursor-not-allowed" data-step="3" href="#strategy">
+                <span class="material-symbols-outlined mr-4" data-icon="monitoring">monitoring</span>
+                <span class="font-label-md text-label-md">Strategy</span>
+            </a>
+            <!-- Review Tab -->
+            <a class="step-tab w-full flex items-center px-6 py-4 border-l-4 border-transparent text-on-surface-variant opacity-50 hover:bg-surface-container transition-all duration-150 group cursor-not-allowed" data-step="4" href="#review">
+                <span class="material-symbols-outlined mr-4" data-icon="article">article</span>
+                <span class="font-label-md text-label-md">Review</span>
+            </a>
+        </div>
+        <div class="px-6 mt-auto pt-8">
+            <button id="saveBtn" class="w-full flex items-center justify-center py-3 bg-surface border border-outline-variant text-on-surface hover:border-secondary transition-colors duration-200 font-label-md text-label-md disabled:opacity-50">
+                Save Progress
+            </button>
+            <div class="mt-4 flex items-center justify-center gap-2 text-on-surface-variant opacity-50">
+                <span class="material-symbols-outlined" style="font-size: 16px;">robot_2</span>
+                <span class="font-label-sm text-label-sm">Wealth Concierge AI</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Canvas -->
+    <main class="flex-1 flex flex-col w-full overflow-y-auto">
+        <div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20 flex-1">
+            <!-- Step 1: Identity -->
+            <div id="identity" class="step-content">
+                <header class="mb-12 max-w-3xl">
+                    <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-4">Welcome to Aurelius</h1>
+                    <div class="h-px w-24 bg-secondary mb-6"></div>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant">To establish your private ledger and curate your portfolio strategy, we must first confirm foundational details of your identity and jurisdiction.</p>
+                </header>
+
+                <div class="bg-surface-container-lowest border border-outline-variant max-w-3xl p-8 md:p-12">
+                    <h2 class="font-headline-md text-headline-md text-primary mb-8 flex items-center">
+                        <span class="material-symbols-outlined text-secondary mr-3" style="font-size: 32px;">fingerprint</span>
+                        Identity Verification
+                    </h2>
+                    <form id="identityForm" class="flex flex-col gap-8">
+                        <!-- Full Name -->
+                        <div class="flex flex-col gap-2 group">
+                            <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="fullName">Full Legal Name</label>
+                            <input class="bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors placeholder:text-outline placeholder:opacity-50" id="fullName" name="fullName" placeholder="As it appears on official documents" type="text" required/>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Residency -->
+                            <div class="flex flex-col gap-2 group">
+                                <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="residency">Primary Residency</label>
+                                <div class="relative">
+                                    <select class="w-full bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors appearance-none cursor-pointer" id="residency" name="residency" required>
+                                        <option disabled selected value="">Select Jurisdiction</option>
+                                        <option value="US">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="CH">Switzerland</option>
+                                        <option value="SG">Singapore</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="OTHER">Other Jurisdiction</option>
+                                    </select>
+                                    <span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant">expand_more</span>
+                                </div>
+                            </div>
+
+                            <!-- Citizenship -->
+                            <div class="flex flex-col gap-2 group">
+                                <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="citizenship">Primary Citizenship</label>
+                                <div class="relative">
+                                    <select class="w-full bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors appearance-none cursor-pointer" id="citizenship" name="citizenship" required>
+                                        <option disabled selected value="">Select Nation</option>
+                                        <option value="US">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="CH">Switzerland</option>
+                                        <option value="SG">Singapore</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="OTHER">Other Nation</option>
+                                    </select>
+                                    <span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant">expand_more</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info Note -->
+                        <div class="bg-surface-container-low p-4 mt-4 border-l-2 border-outline-variant flex items-start gap-3">
+                            <span class="material-symbols-outlined text-on-surface-variant" style="font-size: 20px; margin-top: 2px;">info</span>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm">This information is utilized strictly to structure your initial tax and compliance frameworks. It is held within our encrypted vault.</p>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="mt-8 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-outline-variant pt-8">
+                            <button class="w-full sm:w-auto px-8 py-3 bg-transparent text-on-surface font-label-md text-label-md hover:text-gold-accent transition-colors" type="reset">Cancel</button>
+                            <button class="w-full sm:w-auto px-10 py-3 bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2" type="button" id="identityNext">
+                                Continue
+                                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 2: Financials -->
+            <div id="financials" class="step-content hidden">
+                <header class="mb-12 max-w-3xl">
+                    <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-4">Financial Profile</h1>
+                    <div class="h-px w-24 bg-secondary mb-6"></div>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant">Help us understand your current financial situation and investment goals.</p>
+                </header>
+
+                <div class="bg-surface-container-lowest border border-outline-variant max-w-3xl p-8 md:p-12">
+                    <h2 class="font-headline-md text-headline-md text-primary mb-8 flex items-center">
+                        <span class="material-symbols-outlined text-secondary mr-3" style="font-size: 32px;">account_balance</span>
+                        Assets & Liabilities
+                    </h2>
+                    <form id="financialsForm" class="flex flex-col gap-8">
+                        <!-- Approximate Net Worth -->
+                        <div class="flex flex-col gap-2 group">
+                            <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="netWorth">Approximate Net Worth (USD)</label>
+                            <input class="bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors placeholder:text-outline placeholder:opacity-50" id="netWorth" name="netWorth" placeholder="$" type="number" required/>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Liquid Assets -->
+                            <div class="flex flex-col gap-2 group">
+                                <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="liquidAssets">Liquid Assets (USD)</label>
+                                <input class="bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors placeholder:text-outline placeholder:opacity-50" id="liquidAssets" name="liquidAssets" placeholder="Stocks, bonds, cash" type="number" required/>
+                            </div>
+
+                            <!-- Liabilities -->
+                            <div class="flex flex-col gap-2 group">
+                                <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="liabilities">Total Liabilities (USD)</label>
+                                <input class="bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors placeholder:text-outline placeholder:opacity-50" id="liabilities" name="liabilities" placeholder="Mortgages, loans" type="number" required/>
+                            </div>
+                        </div>
+
+                        <!-- Investment Experience -->
+                        <div class="flex flex-col gap-2 group">
+                            <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="investmentExperience">Investment Experience</label>
+                            <div class="relative">
+                                <select class="w-full bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors appearance-none cursor-pointer" id="investmentExperience" name="investmentExperience" required>
+                                    <option disabled selected value="">Select Level</option>
+                                    <option value="conservative">Conservative</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="aggressive">Aggressive</option>
+                                </select>
+                                <span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant">expand_more</span>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-outline-variant pt-8">
+                            <button class="w-full sm:w-auto px-8 py-3 bg-transparent text-on-surface font-label-md text-label-md hover:text-gold-accent transition-colors" type="button" id="financialsPrev">
+                                <span class="material-symbols-outlined mr-2" style="font-size: 18px; display: inline;">arrow_back</span>
+                                Back
+                            </button>
+                            <button class="w-full sm:w-auto px-10 py-3 bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2" type="button" id="financialsNext">
+                                Continue
+                                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 3: Strategy -->
+            <div id="strategy" class="step-content hidden">
+                <header class="mb-12 max-w-3xl">
+                    <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-4">Portfolio Strategy</h1>
+                    <div class="h-px w-24 bg-secondary mb-6"></div>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant">Define your investment objectives and risk tolerance.</p>
+                </header>
+
+                <div class="bg-surface-container-lowest border border-outline-variant max-w-3xl p-8 md:p-12">
+                    <h2 class="font-headline-md text-headline-md text-primary mb-8 flex items-center">
+                        <span class="material-symbols-outlined text-secondary mr-3" style="font-size: 32px;">monitoring</span>
+                        Investment Objectives
+                    </h2>
+                    <form id="strategyForm" class="flex flex-col gap-8">
+                        <!-- Primary Objective -->
+                        <div class="flex flex-col gap-2 group">
+                            <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="investmentObjective">Primary Investment Objective</label>
+                            <div class="relative">
+                                <select class="w-full bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors appearance-none cursor-pointer" id="investmentObjective" name="investmentObjective" required>
+                                    <option disabled selected value="">Select Objective</option>
+                                    <option value="growth">Capital Growth</option>
+                                    <option value="income">Income Generation</option>
+                                    <option value="preservation">Wealth Preservation</option>
+                                    <option value="mixed">Mixed Strategy</option>
+                                </select>
+                                <span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant">expand_more</span>
+                            </div>
+                        </div>
+
+                        <!-- Time Horizon -->
+                        <div class="flex flex-col gap-2 group">
+                            <label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="timeHorizon">Investment Time Horizon</label>
+                            <div class="relative">
+                                <select class="w-full bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-primary focus:ring-0 focus:border-secondary transition-colors appearance-none cursor-pointer" id="timeHorizon" name="timeHorizon" required>
+                                    <option disabled selected value="">Select Horizon</option>
+                                    <option value="short">1-3 years</option>
+                                    <option value="medium">3-10 years</option>
+                                    <option value="long">10+ years</option>
+                                </select>
+                                <span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant">expand_more</span>
+                            </div>
+                        </div>
+
+                        <!-- Risk Tolerance -->
+                        <div class="flex flex-col gap-2">
+                            <label class="font-label-md text-label-md text-on-surface-variant">Risk Tolerance</label>
+                            <div class="flex gap-4 mt-2">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="riskTolerance" value="low" required class="w-4 h-4"/>
+                                    <span class="font-body-md text-body-md">Low</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="riskTolerance" value="medium" required class="w-4 h-4"/>
+                                    <span class="font-body-md text-body-md">Medium</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="riskTolerance" value="high" required class="w-4 h-4"/>
+                                    <span class="font-body-md text-body-md">High</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-outline-variant pt-8">
+                            <button class="w-full sm:w-auto px-8 py-3 bg-transparent text-on-surface font-label-md text-label-md hover:text-gold-accent transition-colors" type="button" id="strategyPrev">
+                                <span class="material-symbols-outlined mr-2" style="font-size: 18px; display: inline;">arrow_back</span>
+                                Back
+                            </button>
+                            <button class="w-full sm:w-auto px-10 py-3 bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2" type="button" id="strategyNext">
+                                Continue
+                                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 4: Review -->
+            <div id="review" class="step-content hidden">
+                <header class="mb-12 max-w-3xl">
+                    <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-4">Review & Confirm</h1>
+                    <div class="h-px w-24 bg-secondary mb-6"></div>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant">Please review your information before finalizing your account setup.</p>
+                </header>
+
+                <div class="bg-surface-container-lowest border border-outline-variant max-w-3xl p-8 md:p-12">
+                    <h2 class="font-headline-md text-headline-md text-primary mb-8 flex items-center">
+                        <span class="material-symbols-outlined text-secondary mr-3" style="font-size: 32px;">article</span>
+                        Summary
+                    </h2>
+                    <div id="reviewSummary" class="flex flex-col gap-6 mb-8">
+                        <!-- Identity Section -->
+                        <div class="border-b border-outline-variant pb-6">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-4">Identity</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Full Name</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewName">-</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Residency</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewResidency">-</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Citizenship</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewCitizenship">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Financials Section -->
+                        <div class="border-b border-outline-variant pb-6">
+                            <h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-4">Financials</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Net Worth</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewNetWorth">-</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Liquid Assets</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewLiquidAssets">-</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Total Liabilities</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewLiabilities">-</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Experience Level</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewExperience">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strategy Section -->
+                        <div>
+                            <h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-4">Strategy</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Objective</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewObjective">-</p>
+                                </div>
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Time Horizon</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewHorizon">-</p>
+                                </div>
+                                <div class="col-span-full">
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Risk Tolerance</p>
+                                    <p class="font-body-md text-body-md text-primary" id="reviewRisk">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Consent -->
+                    <div class="bg-surface-container-low p-4 mb-8 border-l-2 border-outline-variant">
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" id="consentCheckbox" required class="w-5 h-5 mt-0.5"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">
+                                I confirm that the information provided is accurate and complete. I authorize Aurelius to use this information to establish my wealth management account and provide advisory services in accordance with applicable regulations.
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-outline-variant pt-8">
+                        <button class="w-full sm:w-auto px-8 py-3 bg-transparent text-on-surface font-label-md text-label-md hover:text-gold-accent transition-colors" type="button" id="reviewPrev">
+                            <span class="material-symbols-outlined mr-2" style="font-size: 18px; display: inline;">arrow_back</span>
+                            Back
+                        </button>
+                        <button class="w-full sm:w-auto px-10 py-3 bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2 disabled:opacity-50" type="button" id="submitOnboarding" disabled>
+                            Complete Setup
+                            <span class="material-symbols-outlined" style="font-size: 18px;">check_circle</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentStepIndex = 0;
+        const steps = ['identity', 'financials', 'strategy', 'review'];
+        const formData = {};
+
+        function showStep(stepIndex) {
+            steps.forEach((step, index) => {
+                document.getElementById(step).classList.toggle('hidden', index !== stepIndex);
+                const tab = document.querySelector(`[data-step="${index + 1}"]`);
+                if (tab) {
+                    tab.classList.toggle('border-secondary', index === stepIndex);
+                    tab.classList.toggle('bg-surface-container-highest', index === stepIndex);
+                    tab.classList.toggle('text-primary', index === stepIndex);
+                    tab.classList.toggle('font-bold', index === stepIndex);
+                }
+            });
+            document.getElementById('currentStep').textContent = stepIndex + 1;
+            window.scrollTo(0, 0);
+        }
+
+        function collectFormData() {
+            const identity = Object.fromEntries(new FormData(document.getElementById('identityForm')));
+            const financials = Object.fromEntries(new FormData(document.getElementById('financialsForm')));
+            const strategy = Object.fromEntries(new FormData(document.getElementById('strategyForm')));
+            return { ...identity, ...financials, ...strategy };
+        }
+
+        function populateReview() {
+            const data = collectFormData();
+            document.getElementById('reviewName').textContent = data.fullName || '-';
+            document.getElementById('reviewResidency').textContent = data.residency || '-';
+            document.getElementById('reviewCitizenship').textContent = data.citizenship || '-';
+            document.getElementById('reviewNetWorth').textContent = data.netWorth ? `$${parseInt(data.netWorth).toLocaleString()}` : '-';
+            document.getElementById('reviewLiquidAssets').textContent = data.liquidAssets ? `$${parseInt(data.liquidAssets).toLocaleString()}` : '-';
+            document.getElementById('reviewLiabilities').textContent = data.liabilities ? `$${parseInt(data.liabilities).toLocaleString()}` : '-';
+            document.getElementById('reviewExperience').textContent = data.investmentExperience || '-';
+            document.getElementById('reviewObjective').textContent = data.investmentObjective || '-';
+            document.getElementById('reviewHorizon').textContent = data.timeHorizon || '-';
+            document.getElementById('reviewRisk').textContent = data.riskTolerance || '-';
+        }
+
+        // Step Navigation
+        document.getElementById('identityNext').addEventListener('click', () => {
+            if (document.getElementById('identityForm').checkValidity()) {
+                currentStepIndex = 1;
+                showStep(currentStepIndex);
+            }
+        });
+
+        document.getElementById('financialsPrev').addEventListener('click', () => {
+            currentStepIndex = 0;
+            showStep(currentStepIndex);
+        });
+
+        document.getElementById('financialsNext').addEventListener('click', () => {
+            if (document.getElementById('financialsForm').checkValidity()) {
+                currentStepIndex = 2;
+                showStep(currentStepIndex);
+            }
+        });
+
+        document.getElementById('strategyPrev').addEventListener('click', () => {
+            currentStepIndex = 1;
+            showStep(currentStepIndex);
+        });
+
+        document.getElementById('strategyNext').addEventListener('click', () => {
+            if (document.getElementById('strategyForm').checkValidity()) {
+                currentStepIndex = 3;
+                populateReview();
+                showStep(currentStepIndex);
+            }
+        });
+
+        document.getElementById('reviewPrev').addEventListener('click', () => {
+            currentStepIndex = 2;
+            showStep(currentStepIndex);
+        });
+
+        // Consent checkbox enables submit button
+        document.getElementById('consentCheckbox').addEventListener('change', (e) => {
+            document.getElementById('submitOnboarding').disabled = !e.target.checked;
+        });
+
+        // Submit Onboarding
+        document.getElementById('submitOnboarding').addEventListener('click', async () => {
+            const data = collectFormData();
+            try {
+                const response = await fetch('/api/onboard', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    window.location.href = '/';
+                } else {
+                    alert('Error saving onboarding data');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error saving onboarding data');
+            }
+        });
+
+        // Save Progress
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            const data = collectFormData();
+            try {
+                const response = await fetch('/api/save-progress', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ step: currentStepIndex + 1, data })
+                });
+                if (response.ok) {
+                    alert('Progress saved!');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        // Initialize
+        showStep(0);
+    </script>
+</body>
+</html>

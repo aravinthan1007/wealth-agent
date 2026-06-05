@@ -1,0 +1,52 @@
+{
+  "assets": {
+    "checking": 5000,
+    "savings": 15000,
+    "investments": 20000
+  },
+  "liabilities": {
+    "mortgage": 80000,
+    "car_loan": 15000
+  },
+  "expenses": [
+    {
+      "date": "2026-05-01",
+      "category": "groceries",
+      "amount": 300
+    },
+    {
+      "date": "2026-05-02",
+      "category": "utilities",
+      "amount": 200
+    }
+  ],
+  "income": [
+    {
+      "source": "salary",
+      "amount_monthly": 8000
+    },
+    {
+      "source": "freelance",
+      "amount_monthly": 2000
+    }
+  ],
+  "credit_cards": [
+    {
+      "name": "Visa",
+      "balance": 1000,
+      "limit": 10000
+    },
+    {
+      "name": "Amex",
+      "balance": 500,
+      "limit": 5000
+    }
+  ],
+  "profile": {
+    "risk_tolerance": "aggressive",
+    "retirement_age": 62,
+    "goals": [
+      "retire early"
+    ]
+  }
+}
