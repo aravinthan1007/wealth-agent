@@ -1,0 +1,25 @@
+# Secrets — never commit
+.env
+.env.*
+*.key
+*-key.json
+service-account*.json
+credentials.json
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / build
+node_modules/
+dist/
+build/
+
+# Logs / OS
+*.log
+.DS_Store
